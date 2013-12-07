@@ -17,10 +17,15 @@ var map = {
   40: 'down'
 };
 
-var keys = require('keys')(map).bind();
+var keys = require('keys')(map);
 
-keys.on('down', console.log); // => left, up, ...
-keys.on('up', console.log); // => right, down, ...
+document.body.onkeydown = keys.onkeydown;
+document.body.onkeyup = keys.onkeyup;
+
+var log = console.log.bind(console);
+
+keys.on('down', log);
+keys.on('up', log);
 ```
 
 ## API
@@ -33,18 +38,10 @@ Creates key `map` handler.
 where their corresponding values are emitted
 on keyup/down events.
 
-### #bind(el)
-
-Bind key events to `el`. Defaults to `document.body`.
-
-### #unbind(el)
-
-Unbind key events from `el`. Defaults to `document.body`.
-
 ## Events
 
-- `down` (value, event)
-- `up` (value, event)
+- `down` (key, event)
+- `up` (key, event)
 
 ## License
 

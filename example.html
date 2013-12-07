@@ -14,10 +14,15 @@
       40: 'down'
     };
 
-    var keys = require('keys')(map).bind();
+    var keys = require('keys')(map);
 
-    keys.on('down', console.log); // => left, up, ...
-    keys.on('up', console.log); // => right, down, ...
+    document.body.onkeydown = keys.onkeydown;
+    document.body.onkeyup = keys.onkeyup;
+
+    var log = console.log.bind(console);
+
+    keys.on('down', log);
+    keys.on('up', log);
 
     </script>
   </body>

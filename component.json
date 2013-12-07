@@ -1,0 +1,16 @@
+{
+  "name": "keys",
+  "repo": "entity/keys",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "bind to a key map",
+  "keywords": ["keyboard", "keys", "event"],
+  "author": "stagas",
+  "scripts": ["index.js"],
+  "dependencies": {
+    "component/event": "*",
+    "component/emitter": "*",
+    "yields/prevent": "*",
+    "yields/stop": "*"
+  }
+}

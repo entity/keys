@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>keys</title>
+  </head>
+  <body>
+    <script src="../build/build.js"></script>
+    <script>
+
+    var map = {
+      37: 'left',
+      38: 'up',
+      39: 'right',
+      40: 'down'
+    };
+
+    var Keys = require('keys');
+
+    var keys = Keys(map).bind();
+
+    keys.on('down', log('DOWN'));
+    keys.on('up', log('UP'));
+
+    function log(state){
+      return function(key, ev){
+        console.log(state, key, ev);
+      };
+    }
+
+    setTimeout(function(){
+      console.log('unbind');
+      keys.unbind();
+    }, 5000);
+
+    </script>
+  </body>
+</html>

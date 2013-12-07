@@ -13,7 +13,6 @@
  * Module dependencies.
  */
 
-var event = require('event');
 var emitter = require('emitter');
 var prevent = require('prevent');
 var stop = require('stop');
@@ -31,47 +30,11 @@ var stop = require('stop');
  */
 
 module.exports = function(map){
-  var ondown = on('down');
-  var onup = on('up');
   var keys = emitter({
-    bind: bind,
-    unbind: unbind
+    onkeydown: on('down'),
+    onkeyup: on('up')
   });
   return keys;
-
-  /**
-   * Binds key events to `el`.
-   *
-   * Defaults to `document.body`.
-   *
-   * @param {Element} [el]
-   * @return {Object}
-   * @api public
-   */
-
-  function bind(el){
-    el = el || document.body;
-    event.bind(el, 'keydown', ondown);
-    event.bind(el, 'keyup', onup);
-    return keys;
-  }
-
-  /**
-   * Unbinds key events from `el`.
-   *
-   * Defaults to `document.body`.
-   *
-   * @param {Element} [el]
-   * @return {Object}
-   * @api public
-   */
-
-  function unbind(el){
-    el = el || document.body;
-    event.unbind(el, 'keydown', ondown);
-    event.unbind(el, 'keyup', onup);
-    return keys;
-  }
 
   /**
    * Listener factory for key `state`.

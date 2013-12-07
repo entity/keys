@@ -14,23 +14,22 @@
       40: 'down'
     };
 
-    var Keys = require('keys');
+    var map = {
+      37: 'left',
+      38: 'up',
+      39: 'right',
+      40: 'down'
+    };
 
-    var keys = Keys(map).bind();
+    var keys = require('keys')(map);
 
-    keys.on('down', log('DOWN'));
-    keys.on('up', log('UP'));
+    document.body.onkeydown = keys.onkeydown;
+    document.body.onkeyup = keys.onkeyup;
 
-    function log(state){
-      return function(key, ev){
-        console.log(state, key, ev);
-      };
-    }
+    var log = console.log.bind(console);
 
-    setTimeout(function(){
-      console.log('unbind');
-      keys.unbind();
-    }, 5000);
+    keys.on('down', log);
+    keys.on('up', log);
 
     </script>
   </body>

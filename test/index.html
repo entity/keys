@@ -15,23 +15,15 @@
       40: 'down'
     };
 
-    var Keys = require('keys');
+    var keys = require('keys')(map);
 
-    var keys = Keys(map).bind(box);
+    box.onkeydown = keys.onkeydown;
+    box.onkeyup = keys.onkeyup;
 
-    keys.on('down', log('DOWN'));
-    keys.on('up', log('UP'));
+    var log = console.log.bind(console);
 
-    function log(state){
-      return function(key, ev){
-        console.log(state, key, ev);
-      };
-    }
-
-    setTimeout(function(){
-      console.log('unbind');
-      keys.unbind(box);
-    }, 5000);
+    keys.on('down', log);
+    keys.on('up', log);
 
     </script>
   </body>

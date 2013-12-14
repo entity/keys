@@ -24,8 +24,9 @@ document.body.onkeyup = keys.onkeyup;
 
 var log = console.log.bind(console);
 
-keys.on('down', log);
-keys.on('up', log);
+keys.on('keydown', log);
+keys.on('keyup', log);
+keys.on('change', log);
 ```
 
 ## API
@@ -40,8 +41,9 @@ on keyup/down events.
 
 ## Events
 
-- `down` (key, event)
-- `up` (key, event)
+- `keydown` (event, key)
+- `keyup` (event, key)
+- `change` (event, key, state)
 
 ## License
 

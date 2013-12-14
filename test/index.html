@@ -4,7 +4,7 @@
     <title>keys</title>
   </head>
   <body>
-    <input id="box">
+    <input id="input">
     <script src="../build/build.js"></script>
     <script>
 
@@ -17,13 +17,14 @@
 
     var keys = require('keys')(map);
 
-    box.onkeydown = keys.onkeydown;
-    box.onkeyup = keys.onkeyup;
+    input.onkeydown = keys.onkeydown;
+    input.onkeyup = keys.onkeyup;
 
     var log = console.log.bind(console);
 
-    keys.on('down', log);
-    keys.on('up', log);
+    keys.on('keydown', log);
+    keys.on('keyup', log);
+    keys.on('change', log);
 
     </script>
   </body>

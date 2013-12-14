@@ -30,10 +30,12 @@ var stop = require('stop');
  */
 
 module.exports = function(map){
-  var keys = emitter({
-    onkeydown: on('down'),
-    onkeyup: on('up')
-  });
+  var pressed = {};
+  var keys = emitter({});
+  keys.onkeydown = on('keydown');
+  keys.onkeyup = on('keyup');
+  on.keydown = onkeydown;
+  on.keyup = onkeyup;
   return keys;
 
   /**
@@ -50,9 +52,38 @@ module.exports = function(map){
       if (key) {
         stop(ev);
         prevent(ev);
-        keys.emit(state, key, ev);
+        on[state](ev, key);
         return false;
       }
     };
+  }
+
+  /**
+   * Keydown handler.
+   *
+   * @param {Event} event
+   * @param {Mixed} key
+   * @api private
+   */
+
+  function onkeydown(event, key){
+    if (pressed[key]) return;
+    pressed[key] = true;
+    keys.emit('keydown', event, key);
+    keys.emit('change', event, key, 'down');
+  }
+
+  /**
+   * Keyup handler.
+   *
+   * @param {Event} event
+   * @param {Mixed} key
+   * @api private
+   */
+
+  function onkeyup(event, key){
+    pressed[key] = false;
+    keys.emit('keyup', event, key);
+    keys.emit('change', event, key, 'up');
   }
 };

@@ -21,8 +21,9 @@
 
     var log = console.log.bind(console);
 
-    keys.on('down', log);
-    keys.on('up', log);
+    keys.on('keydown', log);
+    keys.on('keyup', log);
+    keys.on('change', log);
 
     </script>
   </body>
